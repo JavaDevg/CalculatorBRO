@@ -1,5 +1,5 @@
 package com.CoolJavaDev;
-
+// Package imports
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -12,8 +12,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+//Main Class
 public class CalcBRO implements ActionListener {
+
+    // Variable Declarations
+
     String[] strings;
     int ind;
     double tmpRes;
@@ -26,13 +29,16 @@ public class CalcBRO implements ActionListener {
     JButton decButton, equButton, delButton, clrButton;
     JPanel panel;
 
-    Font calcFont = new Font("Comic Sans", Font.PLAIN, 28);
+    Font calcFont = new Font ("Calibri", Font.PLAIN, 30);
 
     double result = 0;
     char operator;
     ArrayList<Character> operatorsArr = new ArrayList<>();
-
+// Constructor of the class
     CalcBRO() {
+
+        // GUI components initialization
+
         frame = new JFrame("RKBRO CALCULATOR GUI");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(420, 550);
@@ -120,13 +126,18 @@ public class CalcBRO implements ActionListener {
         frame.setVisible (true);
 
     }
-
+// Main method
     public static void main(String[] args) {
         new CalcBRO();
     }
 
+// Main application logic
+
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        // Logic For the buttons
+
         for (int i = 0; i < 10; i++) {
             if (e.getSource() == numButtons[i]) {
                 textField.setText(textField.getText().concat(String.valueOf(i)));
@@ -138,6 +149,7 @@ public class CalcBRO implements ActionListener {
         }
 
         if (e.getSource() == addButton) {
+
 
             String num = textField.getText();
             operator = '+';
@@ -195,6 +207,7 @@ public class CalcBRO implements ActionListener {
             strings = txt.split("[+\\-]");
             result = getMul(strings[ind]);
 
+            // Add and Subtract
             for (char operate : operatorsArr) {
                 ind++;
                 operator = operate;
@@ -209,7 +222,7 @@ public class CalcBRO implements ActionListener {
             operatorsArr.clear();
         }
     }
-
+// For multiplying
     public double getMul(String min) {
 
         tmpRes = 1;
@@ -233,7 +246,7 @@ public class CalcBRO implements ActionListener {
         }
         return tmpRes;
     }
-
+// For Dividing
     public double getDiv(String din) {
 
         tmpRes = 1;
@@ -241,12 +254,12 @@ public class CalcBRO implements ActionListener {
 
         if (din.contains("/")) {
             String[] dArr = din.split("/");
-            for (String ignored : dArr) {
-                tmpRes = Double.parseDouble(dArr[tmpInd]);
-                tmpRes /= Double.parseDouble(dArr[tmpInd]);
-                tmpInd++;
-
+            tmpRes = Double.parseDouble(dArr[0]);
+            for (int i = 1; i < dArr.length; i++) {
+                tmpRes /=  Double.parseDouble(dArr[i]) ;
             }
+
+
         } else {
             tmpRes = Double.parseDouble(din);
         }
